@@ -3,8 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Data Dashboard</title>
+    <!--script type = "text / javascript" src = "https://www.gstatic.com/charts/loader.js" > </ script> <script type = "text / javascript" > google . cuadros . load ( 'current' , { packages : [ 'corechart' ]}); google . cuadros . setOnLoadCallback ( drawChart ); ... </ script-->  
   </head>
   <body>
+
+    <main>
+    <h1>Laboratoria (logo) <strong> Talento que transforma</strong> </h1>
+    <select id="selection">
+
+        <option >Selecciona sede - generación</option>
+        <option value = "AQP1" data-sede="AQP" data-generacion ="2016-2">Arequipa 2016-2</option>
+        <option value = "AQP2" data-sede="AQP" data-generacion ="2017-1">Arequipa 2017-1</option>
+        <option value = "CDMX1" data-sede="CDMX" data-generacion ="2017-1">Ciudad de México 2017-1</option>
+        <option value = "CDMX2" data-sede="CDMX" data-generacion ="2017-2">Ciudad de México 2017-2</option>
+        <option value = "LIMA1" data-sede="LIM" data-generacion ="2016-2">Lima 2016-2</option>
+        <option value="LIMA2" data-sede="LIM" data-generacion="2017-1">Lima 2017-1</option>
+        <option value="LIMA3" data-sede="LIM" data-generacion="2017-2">Lima 2017-2</option>
+        <option value="SGO-CHILE1" data-sede="SCL" data-generacion="2016-2">Santiago de Chile 2016-2</option>
+        <option value="SGO-CHILE2" data-sede="SCL" data-generacion="2017-1">Santiago de Chile 2017-1</option>
+        <option value="SGO-CHILE3" data-sede="SCL" data-generacion="2017-2">Santiago de Chile 2017-2</option>
+
+    </select>
+    <section id="contenedor-coders">
+        <div class="coder plantilla">
+            <img class="foto-coder">
+            <p class="nombre"></p>
+            <p class="turno"></p>
+            <span class="correo"></span>
+            <span class="generacion"></span>
+            <!--div>
+            </div-->
+        </div>
+    </section>
+</main>
 
 		<!-- Base de datos -->
 		<script src="./js/data.js"></script>
