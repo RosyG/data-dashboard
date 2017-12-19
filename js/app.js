@@ -62,10 +62,7 @@ function drawCharTeacher() {
 
   var options = {
       title: 'Puntuación promedio de l@s profesores',
-          /*slices: {
-           0: { color: 'yellow' },
-           /*1: { color: 'purple' }*/
-       }
+  }
   var chart = new google.visualization.ColumnChart(document.getElementById("teacher"));
   chart.draw(data, options);
 }//Fin de la función drawCharTeacher.
@@ -73,30 +70,29 @@ function drawCharTeacher() {
 }//Fin de la función averageTeachers ().
 
 function averageJedi (allRatings) {
-  var averageJedi = 0;//Variable que guardará el promedio de la calificación a los Jedi Master.
-  for (var i = 0; i < allRatings.length; i++) {
-    var ratingsJedi = allRatings[i]["jedi"];//Accediendo a la calificación de un sprint.
-    averageJedi = (ratingsJedi + averageJedi);//Suma de la calificación a lxs Jedi Master en cada sprint.
-  }
-  averageJedi = parseInt((averageJedi / allRatings.length).toFixed(2));
-  //console.log(averageJedi);//Muestra el promedio de la calificación de los Jedi Master en todos los sprints.
+    var averageJedi = 0;//Variable que guardará el promedio de la calificación a los Jedi Master.
+    for (var i = 0; i < allRatings.length; i++) {
+      var ratingsJedi = allRatings[i]["jedi"];//Accediendo a la calificación de un sprint.
+      averageJedi = (ratingsJedi + averageJedi);//Suma de la calificación a lxs Jedi Master en cada sprint.
+    }
+    averageJedi = parseInt((averageJedi / allRatings.length).toFixed(2));
+    //console.log(averageJedi);//Muestra el promedio de la calificación de los Jedi Master en todos los sprints.
 
-  //Gráfica de las puntuaciones de los Jedi en promedio.
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawCharJedi);
-function drawCharJedi() {
-  var data = google.visualization.arrayToDataTable([
-    ['Jedi', 'PromedioJedi', { role: 'style' }],
-    ['Jedi', averageJedi, 'stroke-color: #459A81; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+    //Gráfica de las puntuaciones de los Jedi en promedio.
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChartJedi);
+    function drawChartJedi() {
+      var data = google.visualization.arrayToDataTable([
+        ['Jedi', 'PromedioJedi', { role: 'style' }],
+        ['Jedi', averageJedi, 'stroke-color: #459A81; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ]);
 
-  ]);
-
-  var options = {
-      title: 'Puntuación promedio de l@s profesores',
-       }
-  var chart = new google.visualization.ColumnChart(document.getElementById("jedi"));
-  chart.draw(data, options);
-}//Fin de la función drawCharJedi.
+        var options = {
+          title: 'Puntuación promedio de l@s profesores',
+        }
+        var chart = new google.visualization.ColumnChart(document.getElementById("jedi"));
+        chart.draw(data, options);
+    }//Fin de la función drawCharJedi.
 
 }//Fin de la función averageJedi ().
 
@@ -126,17 +122,14 @@ function satisfiedStudents (allRatings) {
       title: 'Porcentaje General de las estudiantes satisfechas por su experiencia en Laboratoria',
       pieHole: 0.4,
       slices: {
-       0: { color: 'yellow' },
-       1: { color: 'purple' }
-     },
+       0: { color: '#27d5db' },
+       1: { color: '#1835a5' }
+      }
    }
 
     var chart = new google.visualization.PieChart(document.getElementById('satisfied'));
     chart.draw(data, options);
   } //Fin de la función drawChartSatisfiedGeneral.
-
-
-
 }//Fin de la función satisfiedStudents ().
 
 
@@ -146,26 +139,21 @@ function NetPromoterScore (allRatings) {
   var averagePassive = 0;
   var averageDetractors = 0;
 
-    for (var i = 0; i < allRatings.length; i++) {
+  for (var i = 0; i < allRatings.length; i++) {
       var answerPromoter = allRatings[i]["nps"]["promoters"];//Valores de las respuestas en Promoters, son entre 0%-100%.
       averagePromoters = (answerPromoter + averagePromoters);
       var answerPassive = allRatings[i]["nps"]["passive"];//Valores de las respuestas en Passive.
       averagePassive = (answerPassive + averagePassive);
       var answerDetractors = allRatings[i]["nps"]["detractors"];//Valores de las respuestas en Detractors.
       averageDetractors = (answerDetractors + averageDetractors);
-    }
-    averagePromoters = averagePromoters / totalAnswers;
-    averagePassive = averagePassive / totalAnswers;
-    averageDetractors = averageDetractors / totalAnswers;
-    var nps = averagePromoters - averageDetractors; //Valor del NPS= [Promoters] - [Detractors].
-    /*console.log(averagePromoters);
-      console.log(nps);
-      console.log(averagePassive);
-      console.log(averageDetractors);
-    */
+  }
+  averagePromoters = averagePromoters / totalAnswers;
+  averagePassive = averagePassive / totalAnswers;
+  averageDetractors = averageDetractors / totalAnswers;
+  var nps = averagePromoters - averageDetractors; //Valor del NPS= [Promoters] - [Detractors].
   /* Esto no es valido hacerlo, porque el la DATA ya nos proporciona un promedio de promoter, passive y detractor en cada sprint.
-[Promoters] = [Respuestas 9 o 10] / [Total respuestas] * 100
-*/
+    [Promoters] = [Respuestas 9 o 10] / [Total respuestas] * 100
+  */
 }//Fin de la función NetPromoterScore.
 
 
@@ -192,17 +180,13 @@ function exceedsGoal(allTheStudents) {
       pointsHse = sprint[j]["score"]["hse"];//Iteración de los puntos en HSE en cada sprint cursado.
       allPointsHse = pointsHse + allPointsHse;//Suma de todos los puntos HSE por una alumna.
     }
-
-    //console.log(allPointsTech);
-    //console.log(allPointsHse);
     var maxPointsTech = maxTech * sprint.length;//Se multiplica a los puntos máximos que se alcanza en un sprint y se multiplica por el # de sprint del que se tiene evaluación de puntos TECH.
     var averageTech = ((allPointsTech/maxPointsTech)*100).toFixed(2);//promedio de todos los sprints en una alumna.
     var maxPointsHse = maxHse* sprint.length;//Se multiplica a los puntos máximos que se alcanza en un sprint y se multiplica por el # de sprint del que se tiene evaluación de puntos HSE.
     var averageHse = ((allPointsHse/maxPointsHse)*100).toFixed(2);//promedio de todos los sprints en una alumna.
     allPointsTech = 0;//Se limpia la variable para que no se acumule la suma de los puntos TECH de las alumnas anteriores.
     allPointsHse = 0;//Se limpia la variable para que no se acumule la suma de los puntos HSE de las alumnas anteriores.
-    //console.log(averageTech);
-    //console.log(averageHse);
+
     if (averageTech>=70 && averageHse>=70) {
       //console.log("estudiante aprobada");
       approvedStudent = approvedStudent + 1;//# de alumnas que superan el 70% en ambos TECH Y HSE.
@@ -239,6 +223,10 @@ function exceedsGoal(allTheStudents) {
     var options = {
       title: 'Porcentaje General de las estudiantes calificación mayor al 70% en TECH',
       pieHole: 0.4,
+      slices: {
+       0: { color: '#dfe20f' },
+       1: { color: '#e0e24a' }
+      }
     };
     var chart = new google.visualization.PieChart(document.getElementById('tech'));
     chart.draw(data, options);
@@ -247,18 +235,21 @@ function exceedsGoal(allTheStudents) {
 
   function drawChartHse() {
     var data = google.visualization.arrayToDataTable([
-      ['aprobación', 'promedio por sprint'],
-      ['Satisfechas', percentageApprovedHse],
-      ['Insatisfechas', totalStudents],
-    ]);
+      ['hse', 'promedio por sprint'],
+      ['Mayor al 70%', percentageApprovedHse],
+      ['Menor al 70%', totalStudents],
+      ]);
     var options = {
       title: 'Porcentaje General de las estudiantes calificación mayor al 70% en HSE',
       pieHole: 0.4,
+      slices: {
+       0: { color: '#046b03' },
+       1: { color: '#48ce46' }
+      }
     };
     var chart = new google.visualization.PieChart(document.getElementById('hse'));
     chart.draw(data, options);
   } //Fin de la función drawChartHse.
-
 
 }//Fin de exceedsGoal ()
 
@@ -277,23 +268,24 @@ function desertion (allTheStudents) {
     }
   var percentageDesertion =((notActive/allTheStudents.length)*100).toFixed(2); //Al número del porcentaje es necesario redondearlo a dos cifras, es por eso que uso el método .toFixed().
   var percentageActive = 100 - percentageDesertion;
-  /*console.log(notActive);//Cantidad de estudiantes que no están activas.
-  console.log(percentageDesertion + "%");//Porcentaje de deserción.
-  console.log(percentageActive + "%");//Porcentaje de alumnas activas.
-  */
+
   //Gráfica de la deserción de estudiantes
-    google.charts.load("current", {packages:["corechart"]});
+  google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChartDesertionGeneral);
   function drawChartDesertionGeneral() {
     var data = google.visualization.arrayToDataTable([
       ['estado de las estudiantes', 'promedio por sprint'],
       ['Activas', percentageActive],
       ['Deserción', parseInt(percentageDesertion)],
-    ]);
+      ]);
 
     var options = {
       title: 'Porcentaje General de la deserción en Laboratoria',
       pieHole: 0.4,
+      slices: {
+       0: { color: '#d827d5' },
+       1: { color: '#84157f' }
+      }
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('desertion'));
